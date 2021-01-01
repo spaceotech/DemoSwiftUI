@@ -64,7 +64,7 @@ struct DetailView : View {
                 
             }.frame(minWidth: 0, maxHeight: 44, alignment: .topLeading)
             
-            //Stack for section and tag load.
+            //Stack for section and filters load.
             VStack(spacing: 0) {
                 ForEach(self.sections.indices, id: \.self) {idx in
                     SectionView(title: self.sections[idx].title ?? "", tags: self.filters[idx],viewModel: self.viewModel)
