@@ -6,7 +6,7 @@ struct TagList: View {
     // MARK: - Properties
     
     @State var allTags: [String]
-    @ObservedObject var viewModel: ShuffleViewModel
+    var viewModel: ShuffleViewModel
     
     // MARK: - Private Properties
     

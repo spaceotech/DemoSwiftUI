@@ -8,7 +8,7 @@ struct ContentView: View {
     var body: some View {
         VStack {
             // Title
-            Text("Filter Demo")
+            Text(Constant.sectionTitle)
                 .font(.largeTitle)
                 .padding(.bottom, 20)
             
@@ -16,7 +16,7 @@ struct ContentView: View {
             Button(action: {
                 self.showingDetail.toggle()
             }) {
-                Text("Select Filter")
+                Text(Constant.filterButtonTitle)
                     .font(.headline)
                     .padding()
                     .background(Color.blue)

@@ -12,7 +12,7 @@ struct SectionView: View {
     let tags: [String]
     
     /// The view model that manages the state of the shuffle feature
-    @ObservedObject var viewModel: ShuffleViewModel
+    var viewModel: ShuffleViewModel
     
     // MARK: - Body
     

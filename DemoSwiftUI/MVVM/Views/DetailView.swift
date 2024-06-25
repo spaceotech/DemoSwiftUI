@@ -1,30 +1,31 @@
 import SwiftUI
 
 /// View model for managing the shuffle feature and selected tags
-class ShuffleViewModel: ObservableObject {
-    @Published var clear: (() -> ())?
-    @Published var selectedTags = [String]()
+
+@Observable class ShuffleViewModel {
+     var clear: (() -> ())?
+     var selectedTags = [String]()
 }
 
 /// A view that displays detailed filter options
 struct DetailView: View {
-    @ObservedObject var viewModel = ShuffleViewModel()
+    var viewModel = ShuffleViewModel()
     @Environment(\.presentationMode) private var presentationMode
     
     // MARK: - Filter Data
     
     /// Categories of filters
     let filters = [
-        ["$50-$100", "$101-$200", "$201-$500", "$500+"],
-        ["Dark Gray", "Yellow", "Green", "Red", "Other"],
-        ["Wool Fabric", "Leather Material", "Cotton", "Nylon", "Chiffon", "Silk Fabric"],
+        [Constant.filterRangeOne, Constant.filterRangeTwo, Constant.filterRangeThree, Constant.filterRangeFour],
+        [Constant.filterColorOne, Constant.filterColorTwo, Constant.filterColorThree, Constant.filterColorFour, Constant.filterColorFive],
+        [Constant.filterTypeOne, Constant.filterTypeTwo, Constant.filterTypeThree, Constant.filterTypeFour, Constant.filterTypeFive, Constant.filterTypeSix],
     ]
     
     /// Section headers
     let sections = [
-        Header("Range"),
-        Header("Color"),
-        Header("Types")
+        Header(Constant.headerFirst),
+        Header(Constant.headerSecond),
+        Header(Constant.headerThird)
     ]
     
     // MARK: - Initialization
@@ -58,7 +59,7 @@ struct DetailView: View {
     
     private var backButton: some View {
         Button(action: { self.presentationMode.wrappedValue.dismiss() }) {
-            Text("Back")
+            Text(Constant.backButton)
                 .fontWeight(.regular)
                 .font(.headline)
                 .foregroundColor(.blue)
@@ -67,7 +68,7 @@ struct DetailView: View {
     
     private var clearButton: some View {
         Button(action: { self.viewModel.clear?() }) {
-            Text("Clear")
+            Text(Constant.clearButton)
                 .fontWeight(.regular)
                 .font(.headline)
                 .foregroundColor(.blue)

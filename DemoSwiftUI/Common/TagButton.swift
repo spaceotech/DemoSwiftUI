@@ -6,7 +6,7 @@ struct TagButton: View {
     // MARK: - Properties
     
     let title: String
-    @ObservedObject var viewModel: ShuffleViewModel
+    var viewModel: ShuffleViewModel
     
     // Button appearance constants
     private let verticalPadding: CGFloat = 13
