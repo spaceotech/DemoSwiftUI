@@ -59,6 +59,6 @@ This project is [MIT](https://choosealicense.com/licenses/mit/) licensed.
 
 ## 👨‍💻 About the Author
 
-[Your Name] - [Your Website or LinkedIn]
+Hitesh Trivedi - https://www.spaceotechnologies.com/
 
 Passionate about creating intuitive and efficient iOS applications using the latest technologies.
