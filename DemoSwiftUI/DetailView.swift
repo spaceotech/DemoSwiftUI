@@ -1,83 +1,97 @@
-//
-//  DetailView.swift
-//  DemoSwiftUI
-//
-
-
 import SwiftUI
 
-class ShuffleViewModel : ObservableObject {
-    @Published var clear: (()->())?
+/// View model for managing the shuffle feature and selected tags
+class ShuffleViewModel: ObservableObject {
+    @Published var clear: (() -> ())?
     @Published var selectedTags = [String]()
 }
 
-struct DetailView : View {
-    @ObservedObject var viewModel : ShuffleViewModel = ShuffleViewModel()
+/// A view that displays detailed filter options
+struct DetailView: View {
+    @ObservedObject var viewModel = ShuffleViewModel()
     @Environment(\.presentationMode) private var presentationMode
     
-    /// Categories Filters
-    let filters =  [
+    // MARK: - Filter Data
+    
+    /// Categories of filters
+    let filters = [
         ["$50-$100", "$101-$200", "$201-$500", "$500+"],
         ["Dark Gray", "Yellow", "Green", "Red", "Other"],
         ["Wool Fabric", "Leather Material", "Cotton", "Nylon", "Chiffon", "Silk Fabric"],
     ]
     
-    /// sections
-    let sections: [Header] = [Header("Range"),
-                              Header("Color"),
-                              Header("Types")]
+    /// Section headers
+    let sections = [
+        Header("Range"),
+        Header("Color"),
+        Header("Types")
+    ]
     
-    init(){
+    // MARK: - Initialization
+    
+    init() {
+        // Customize the appearance of UITableView
         UITableView.appearance().backgroundColor = .clear
         UITableView.appearance().separatorStyle = .none
     }
     
-    /// view body
+    // MARK: - Body
+    
     var body: some View {
-        VStack(alignment: .leading) {
-            HStack {
-                // Button dismiss view
-                Button(action: {
-                    self.presentationMode.wrappedValue.dismiss()
-                }) {
-                    Text("Back")
-                        .fontWeight(.regular)
-                        .font(.headline)
-                        .padding(.leading, 16)
-                        .foregroundColor(.blue)
-                        .background(Color.clear)
-                }
-                
-                Spacer()
-                
-                // Button clear all selected filters
-                Button(action: {
-                    self.viewModel.clear?()
-                }) {
-                    Text("Clear")
-                        .fontWeight(.regular)
-                        .font(.headline)
-                        .padding()
-                        .foregroundColor(.blue)
-                        .background(Color.clear)
-                }
-                
-            }.frame(minWidth: 0, maxHeight: 44, alignment: .topLeading)
-            
-            //Stack for section and filters load.
+        VStack(alignment: .leading, spacing: 0) {
+            navigationBar
+            filterSections
+        }
+    }
+    
+    // MARK: - Private Views
+    
+    private var navigationBar: some View {
+        HStack {
+            backButton
+            Spacer()
+            clearButton
+        }
+        .frame(height: 44)
+        .padding(.horizontal)
+    }
+    
+    private var backButton: some View {
+        Button(action: { self.presentationMode.wrappedValue.dismiss() }) {
+            Text("Back")
+                .fontWeight(.regular)
+                .font(.headline)
+                .foregroundColor(.blue)
+        }
+    }
+    
+    private var clearButton: some View {
+        Button(action: { self.viewModel.clear?() }) {
+            Text("Clear")
+                .fontWeight(.regular)
+                .font(.headline)
+                .foregroundColor(.blue)
+        }
+    }
+    
+    private var filterSections: some View {
             VStack(spacing: 0) {
-                ForEach(self.sections.indices, id: \.self) {idx in
-                    SectionView(title: self.sections[idx].title ?? "", tags: self.filters[idx],viewModel: self.viewModel)
-                        .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: 200,  alignment: .topLeading)
+                ForEach(sections.indices, id: \.self) { idx in
+                    SectionView(
+                        title: self.sections[idx].title ?? "",
+                        tags: self.filters[idx],
+                        viewModel: self.viewModel
+                    ).frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: 200,  alignment: .topLeading)
                 }
             }.frame(minWidth: 0, maxHeight: .infinity, alignment: .topLeading)
-        }
     }
 }
 
+// MARK: - Preview
 
 struct DetailView_Previews: PreviewProvider {
     static var previews: some View {
         DetailView()
     }
 }
+

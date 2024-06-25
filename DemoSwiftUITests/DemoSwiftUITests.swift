@@ -1,9 +1,3 @@
-//
-//  DemoSwiftUITests.swift
-//  DemoSwiftUITests
-//
-
-
 import XCTest
 @testable import DemoSwiftUI
 

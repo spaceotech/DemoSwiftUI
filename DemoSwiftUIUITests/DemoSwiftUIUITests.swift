@@ -1,9 +1,3 @@
-//
-//  DemoSwiftUIUITests.swift
-//  DemoSwiftUIUITests
-//
-
-
 import XCTest
 
 class DemoSwiftUIUITests: XCTestCase {

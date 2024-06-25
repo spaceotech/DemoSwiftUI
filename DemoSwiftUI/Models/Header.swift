@@ -1,8 +1,3 @@
-//
-//  Header.swift
-//  DemoSwiftUI
-
-
 import SwiftUI
 
 struct Header: Identifiable {
